@@ -37,5 +37,5 @@ clj -A:depify.monorepo
 ```
 
 *depify.monorepo* will read any pre-existing `deps.edn` file in your subproject folder and use
-that as an initial starting point. The result of merging ~project.clj~ into
-deps.edn will be written back to corresponding `deps.edn`.
+that as an initial starting point. The result of merging `project.clj` into
+`deps.edn` will be written back to corresponding `deps.edn`.
