@@ -24,9 +24,8 @@ always welcome!
 Create an alias in your `~/.clojure/deps.edn` map:
 
 ```clojure
-:depify.monorepo  {:extra-deps             {org.clojure/clojure {:mvn/version "1.9.0"}
-                                            depify.monorepo     {:git/url "https://github.com/tomasd/depify-monorepo"
-                                                                :sha     "320594a57330f33c6d164c0f0472deade7df8689"}}
+:depify.monorepo  {:extra-deps             {depify.monorepo     {:git/url "https://github.com/tomasd/depify-monorepo"
+                                                                :sha     "e42f4f42b279b33096ed3660df34a963b226db9b"}}
                    :main-opts               ["-m" "depify.monorepo"]}
 ```
 
