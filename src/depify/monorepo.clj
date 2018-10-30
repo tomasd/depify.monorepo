@@ -55,7 +55,8 @@
                 [(::deps-edn project) (-> (depify.project/process project)
                                           (update-internal-dependencies (::deps-edn project) internal-dependencies))])))))
 
-(defn -main [directory & args]
-  (doseq [[target deps-edn] (process directory)]
+(defn -main [& args]
+  (doseq [[target deps-edn] (process (io/file "."))]
     (with-open [writer (io/writer target)]
+      (println "Writing " (.getPath target))
       (pprint/pprint deps-edn writer))))
