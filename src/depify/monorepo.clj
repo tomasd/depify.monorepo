@@ -53,7 +53,7 @@
     (->> projects
          (map (fn [project]
                 [(::deps-edn project) (-> (depify.project/process project)
-                                          (update-internal-dependencies (::deps-edn project) internal-dependencies))])))))
+                                          (update-internal-dependencies (::project-path project) internal-dependencies))])))))
 
 (defn -main [& args]
   (doseq [[target deps-edn] (process (io/file "."))]
