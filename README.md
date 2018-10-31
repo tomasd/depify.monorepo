@@ -16,7 +16,7 @@ tools needed for monorepos.
 Boot, but *depify.monorepo* will do its best to produce a useful `deps.edn` replacement.
 This includes adding extra aliases to provide "missing" functionality. One such
 example is the addition of the `:test` and `:runner` aliases borrowed from Sean
-Corfield's [[https://github.com/seancorfield/dot-clojure/blob/master/deps.edn#L9-L19][dot-clojure]] repo. Other aliases may be added in the future - PRs are
+Corfield's [dot-clojure](https://github.com/seancorfield/dot-clojure/blob/master/deps.edn#L9-L19) repo. Other aliases may be added in the future - PRs are
 always welcome!
 
 # Usage
