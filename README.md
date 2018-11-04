@@ -1,41 +1,47 @@
 # depify.monorepo
-Converts lein monorepo into deps.edn monorepo
+Utilies for converting lein monorepo into deps.edn monorepo
 
 
 # Project description
 
-`depify.monorepo` reads your monorepo project structure and generates `deps.edn` with all 
-dependencies found in `project.clj` files. Monorepo submodules are referenced using `:local/root`.
-These files are suitable for [Clojure CLI tools](https://clojure.org/guides/deps_and_cli]).
+Project consists of following utilities:
 
-If you are looking for single `project.clj` conversion, [depify](https://github.com/hagmonk/depify) 
-is better suited for this purpose. depify.monorepo is built on top of depify with 
-tools needed for monorepos.
+* `depify.projects`
+Recursively visit all subprojects within current directory and 
+generates `deps.edn` as a result of converting `project.clj` 
 
-`deps.edn` and the Clojure CLI tools have a narrower focus than Leiningen or
-Boot, but *depify.monorepo* will do its best to produce a useful `deps.edn` replacement.
-This includes adding extra aliases to provide "missing" functionality. One such
-example is the addition of the `:test` and `:runner` aliases borrowed from Sean
-Corfield's [dot-clojure](https://github.com/seancorfield/dot-clojure/blob/master/deps.edn#L9-L19) repo. Other aliases may be added in the future - PRs are
-always welcome!
+* `depify.generate-overrides`
+Generate `:override-deps` section of `deps.edn` where all subproject 
+references are overriden with `:local/root`.
+
+* `depify.cljsbuild`
+Generates figwheel build files for all `project.clj` containing
+`:cljsbuild` configurations.
 
 # Usage
 
 Create an alias in your `~/.clojure/deps.edn` map:
 
 ```clojure
-:depify.monorepo  {:extra-deps             {depify.monorepo     {:git/url "https://github.com/tomasd/depify.monorepo"
-                                                                :sha     "e42f4f42b279b33096ed3660df34a963b226db9b"}}
-                   :main-opts               ["-m" "depify.monorepo"]}
+:depify.monorepo {:extra-deps             {depify.monorepo     {:git/url "https://github.com/tomasd/depify.monorepo"
+                                                                :sha     "e42f4f42b279b33096ed3660df34a963b226db9b"}}}
 ```
 
-Then, invoke *depify.monorepo* in root folder of your monorepo project. `depify.monorepo` will do it's 
-best to find all the `project.clj` files:
+Then, invoke *depify.monorepo* alias in root folder of your monorepo project with one of the utilities.
 
+Examples:
+
+Generate deps.edn for all monorepo subprojects:
 ```bash
-clj -A:depify.monorepo
+clojure -A:depify.monorepo -m depify.projects
 ```
 
-*depify.monorepo* will read any pre-existing `deps.edn` file in your subproject folder and use
-that as an initial starting point. The result of merging `project.clj` into
-`deps.edn` will be written back to corresponding `deps.edn`.
+Genereate overrides for local development:
+```bash
+clojure -A:depify.monorepo -m depify.generate-overrides
+```
+
+Generate figwheel clojurescript builds:
+```bash
+clojure -A:depify.monorepo -m depify.cljsbuild
+```
