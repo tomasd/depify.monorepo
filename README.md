@@ -24,7 +24,7 @@ Create an alias in your `~/.clojure/deps.edn` map:
 
 ```clojure
 :depify.monorepo {:extra-deps             {depify.monorepo     {:git/url "https://github.com/tomasd/depify.monorepo"
-                                                                :sha     "e42f4f42b279b33096ed3660df34a963b226db9b"}}}
+                                                                :sha     "6062f9057d7369163571b35df22896341077f176"}}}
 ```
 
 Then, invoke *depify.monorepo* alias in root folder of your monorepo project with one of the utilities.
